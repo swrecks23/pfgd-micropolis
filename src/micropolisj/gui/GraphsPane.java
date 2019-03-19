@@ -262,7 +262,7 @@ public class GraphsPane extends JPanel
 				int t = startTime + i * unitPeriod;  // t might be negative
 				if (t % hashPeriod == 0) {
 					// year
-					int year = 1900+(t/(12*Micropolis.CENSUSRATE));
+					int year = 1800+(t/(12*Micropolis.CENSUSRATE));
 					int numHashes = t/hashPeriod;
 					int x = (int)Math.round(leftEdge+i*x_interval);
 					int y = getInsets().top + TOP_MARGIN +
