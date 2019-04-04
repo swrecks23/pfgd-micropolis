@@ -647,6 +647,7 @@ public class Micropolis
 
 		case 13:
 			crimeScan();
+			monsterScan();
 			break;
 
 		case 14:
@@ -657,9 +658,7 @@ public class Micropolis
 			fireAnalysis();
 			doDisasters();
 			break;
-		case 16: 
-			monsterScan();
-			break;
+		
 
 		default:
 			throw new Error("unreachable");
