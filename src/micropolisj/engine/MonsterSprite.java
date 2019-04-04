@@ -78,7 +78,7 @@ public class MonsterSprite extends Sprite
 		if (soundCount > 0) {
 			soundCount--;
 		}
-
+	
 		int d = (this.frame - 1) / 3;   // basic direction
 		int z = (this.frame - 1) % 3;   // step index (only valid for d<4)
 
@@ -126,6 +126,7 @@ public class MonsterSprite extends Sprite
 					soundCount = 50 + city.PRNG.nextInt(101);
 				}
 			}
+			
 		}
 		else {
 			assert this.frame >= 13 && this.frame <= 16;

@@ -214,7 +214,17 @@ public class OverlayMapView extends JComponent
 			}
 		}
 	}
+	
+	private void drawMBURadius(Graphics gr)
+	{
+		int [][] A = engine.mbuMapEffect;
 
+		for (int y = 0; y < A.length; y++) {
+			for (int x = 0; x < A[y].length; x++) {
+				maybeDrawRect(gr, getCI(A[y][x]),x*24,y*24,24,24);
+			}
+		}
+	}
 	private void maybeDrawRect(Graphics gr, Color col, int x, int y, int width, int height)
 	{
 		if (col != null) {
@@ -380,6 +390,8 @@ public class OverlayMapView extends JComponent
 		switch (mapState) {
 		case POLICE_OVERLAY:
 			drawPoliceRadius(gr); break;
+		case MBU_OVERLAY:
+			drawMBURadius(gr); break;
 		case FIRE_OVERLAY:
 			drawFireRadius(gr); break;
 		case CRIME_OVERLAY:

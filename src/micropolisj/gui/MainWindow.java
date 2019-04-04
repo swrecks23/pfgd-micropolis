@@ -149,6 +149,7 @@ public class MainWindow extends JFrame
 		overlaysMenu.add(makeMapStateMenuItem("menu.overlays.POWER_OVERLAY", MapState.POWER_OVERLAY));
 		overlaysMenu.add(makeMapStateMenuItem("menu.overlays.FIRE_OVERLAY", MapState.FIRE_OVERLAY));
 		overlaysMenu.add(makeMapStateMenuItem("menu.overlays.POLICE_OVERLAY", MapState.POLICE_OVERLAY));
+		overlaysMenu.add(makeMapStateMenuItem("menu.overlays.MBU_OVERLAY", MapState.MBU_OVERLAY));
 
 		mapMenu.add(Box.createHorizontalGlue());
 		mapLegendLbl = new JLabel();
@@ -1046,6 +1047,12 @@ public class MainWindow extends JFrame
 		gridBox.add(b6,c);
 
 		b6.add(makeToolBtn(MicropolisTool.AIRPORT));
+		
+		//Add the NEW_BUILDING icon to the tool bar
+		c.gridy++;
+		Box b7 = new Box(BoxLayout.X_AXIS);
+		gridBox.add(b7,c);
+		b7.add(makeToolBtn(MicropolisTool.NEW_BUILDING));
 
 		// add glue to make all elements align toward top
 		c.gridy++;

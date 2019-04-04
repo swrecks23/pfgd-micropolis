@@ -86,7 +86,8 @@ public class Micropolis
 	public int [][] fireRate;       //firestations reach- used for overlay graphs
 	int [][] policeMap;      //police stations- cleared and rebuilt each sim cycle
 	public int [][] policeMapEffect;//police stations reach- used for overlay graphs
-
+	int [][] mbuMap;
+	public int [][] mbuMapEffect;
 	/** For each 8x8 section of city, this is an integer between 0 and 64,
 	 * with higher numbers being closer to the center of the city. */
 	int [][] comRate;
@@ -125,6 +126,7 @@ public class Micropolis
 	int nuclearCount;
 	int seaportCount;
 	int airportCount;
+	int mbuCount;
 
 	int totalPop;
 	int lastCityPop;
@@ -177,6 +179,7 @@ public class Micropolis
 	int roadEffect = 32;
 	int policeEffect = 1000;
 	int fireEffect = 1000;
+	int mbuEffect = 500;
 
 	int cashFlow; //net change in totalFunds in previous year
 
@@ -244,6 +247,8 @@ public class Micropolis
 		fireStMap = new int[smY][smX];
 		policeMap = new int[smY][smX];
 		policeMapEffect = new int[smY][smX];
+		mbuMap = new int[smY][smX];
+		mbuMapEffect = new int[smY][smX];
 		fireRate = new int[smY][smX];
 		comRate = new int[smY][smX];
 
@@ -539,11 +544,13 @@ public class Micropolis
 		seaportCount = 0;
 		airportCount = 0;
 		powerPlants.clear();
+		mbuCount = 0;
 
 		for (int y = 0; y < fireStMap.length; y++) {
 			for (int x = 0; x < fireStMap[y].length; x++) {
 				fireStMap[y][x] = 0;
 				policeMap[y][x] = 0;
+				mbuMap[y][x] = 0;
 			}
 		}
 	}
@@ -649,6 +656,9 @@ public class Micropolis
 		case 15:
 			fireAnalysis();
 			doDisasters();
+			break;
+		case 16: 
+			monsterScan();
 			break;
 
 		default:
@@ -880,6 +890,54 @@ public class Micropolis
 
 		fireMapOverlayDataChanged(MapState.POLICE_OVERLAY);
 	}
+	void monsterScan()
+	{
+		mbuMap = smoothFirePoliceMap(mbuMap);
+		mbuMap = smoothFirePoliceMap(mbuMap);
+		mbuMap = smoothFirePoliceMap(mbuMap);
+
+		for (int sy = 0; sy < mbuMap.length; sy++) {
+			for (int sx = 0; sx < mbuMap[sy].length; sx++) {
+				mbuMapEffect[sy][sx] = mbuMap[sy][sx];
+			}
+		}
+
+		int count = 0;
+		int sum = 0;
+		int cmax = 0;
+		for (int hy = 0; hy < landValueMem.length; hy++) {
+			for (int hx = 0; hx < landValueMem[hy].length; hx++) {
+				int val = landValueMem[hy][hx];
+				if (val != 0) {
+					count++;
+					int z = 128 - val + popDensity[hy][hx];
+					z = Math.min(300, z);
+					z -= mbuMap[hy/4][hx/4];
+					z = Math.min(250, z);
+					z = Math.max(0, z);
+					crimeMem[hy][hx] = z;
+
+					sum += z;
+					if (z > cmax || (z == cmax && PRNG.nextInt(4) == 0)) {
+						cmax = z;
+						crimeMaxLocationX = hx*2;
+						crimeMaxLocationY = hy*2;
+					}
+				}
+				else {
+					crimeMem[hy][hx] = 0;
+				}
+			}
+		}
+
+		if (count != 0)
+			crimeAverage = sum / count;
+		else
+			crimeAverage = 0;
+
+		fireMapOverlayDataChanged(MapState.MBU_OVERLAY);
+	}
+	
 
 	void doDisasters()
 	{
@@ -1108,6 +1166,10 @@ public class Micropolis
 	}
 
 	/** Accessor method for fireRate[]. */
+//	public int getFireStationCoverage(int xpos, int ypos)
+//	{
+//		return fireRate[ypos/8][xpos/8];
+//	}
 	public int getFireStationCoverage(int xpos, int ypos)
 	{
 		return fireRate[ypos/8][xpos/8];
@@ -1461,6 +1523,7 @@ public class Micropolis
 		bb.put("INDUSTRIAL", new MapScanner(this, MapScanner.B.INDUSTRIAL));
 		bb.put("COAL", new MapScanner(this, MapScanner.B.COAL));
 		bb.put("NUCLEAR", new MapScanner(this, MapScanner.B.NUCLEAR));
+		bb.put("NEW_BUILDING", new MapScanner(this, MapScanner.B.NEW_BUILDING));
 		bb.put("FIRESTATION", new MapScanner(this, MapScanner.B.FIRESTATION));
 		bb.put("POLICESTATION", new MapScanner(this, MapScanner.B.POLICESTATION));
 		bb.put("STADIUM_EMPTY", new MapScanner(this, MapScanner.B.STADIUM_EMPTY));

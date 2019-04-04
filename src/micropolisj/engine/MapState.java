@@ -26,5 +26,9 @@ public enum MapState
 	TRAFFIC_OVERLAY,    //TDMAP
 	POWER_OVERLAY,      //PRMAP
 	FIRE_OVERLAY,       //FIMAP
-	POLICE_OVERLAY;     //POMAP
+	POLICE_OVERLAY, 
+	MBU_OVERLAY     	//POMAP
+	
+
+
 }
