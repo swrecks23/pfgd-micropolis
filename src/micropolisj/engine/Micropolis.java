@@ -247,6 +247,7 @@ public class Micropolis
 		fireStMap = new int[smY][smX];
 		policeMap = new int[smY][smX];
 		policeMapEffect = new int[smY][smX];
+		
 		mbuMap = new int[smY][smX];
 		mbuMapEffect = new int[smY][smX];
 		fireRate = new int[smY][smX];
@@ -851,6 +852,9 @@ public class Micropolis
 		for (int sy = 0; sy < policeMap.length; sy++) {
 			for (int sx = 0; sx < policeMap[sy].length; sx++) {
 				policeMapEffect[sy][sx] = policeMap[sy][sx];
+				if(policeMapEffect[sy][sx]!= 0) {
+					System.out.println(policeMapEffect[sy][sx]);
+				}
 			}
 		}
 
@@ -898,6 +902,11 @@ public class Micropolis
 		for (int sy = 0; sy < mbuMap.length; sy++) {
 			for (int sx = 0; sx < mbuMap[sy].length; sx++) {
 				mbuMapEffect[sy][sx] = mbuMap[sy][sx];
+				if (policeMapEffect[sy][sx]!= 0) {
+					//System.out.println(mbuMapEffect[sy][sx]);
+					System.out.println(policeMapEffect[sy][sx]);
+				}
+				
 			}
 		}
 
@@ -911,7 +920,7 @@ public class Micropolis
 					count++;
 					int z = 128 - val + popDensity[hy][hx];
 					z = Math.min(300, z);
-					z -= mbuMap[hy/4][hx/4];
+					z -= mbuMap[ hy/4][hx/4];
 					z = Math.min(250, z);
 					z = Math.max(0, z);
 					crimeMem[hy][hx] = z;

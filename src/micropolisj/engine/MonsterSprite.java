@@ -163,10 +163,11 @@ public class MonsterSprite extends Sprite
 
 		int c = getChar(x, y);
 		if (c == -1 ||
-			(c == RIVER && this.count != 0 && false)
+			(c == POLICESTATION )
 			) {
 			this.frame = 0; //kill zilla
 		}
+		
 
 		for (Sprite s : city.allSprites())
 		{

@@ -121,6 +121,7 @@ public class MakeTiles
 		}
 		File outputFile = new File(outputDir, "tiles"+suffix+".png");
 		System.out.println("Generating tiles array: "+outputFile);
+		System.out.println("daily");
 		ImageIO.write(buf, "png", outputFile);
 
 		// output an index of all tile names and their offset into
