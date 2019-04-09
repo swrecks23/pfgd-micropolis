@@ -22,6 +22,7 @@ public class MonsterSprite extends Sprite
 	int origX;
 	int origY;
 	int step;
+	int health;
 	boolean flag; //true if the monster wants to return home
 
 	//GODZILLA FRAMES
@@ -52,9 +53,10 @@ public class MonsterSprite extends Sprite
 		this.height = 48;
 		this.offx = -24;
 		this.offy = -24;
-
+		
 		this.origX = x;
 		this.origY = y;
+		
 
 		this.frame = xpos > city.getWidth() / 2 ?
 			(ypos > city.getHeight() / 2 ? 10 : 7) :
@@ -66,6 +68,7 @@ public class MonsterSprite extends Sprite
 		this.destY = p.y * 16 + 8;
 		this.flag = false;
 		this.step = 1;
+		this.health = 100;
 	}
 
 	@Override
@@ -123,6 +126,7 @@ public class MonsterSprite extends Sprite
 
 				if (soundCount == 0) {
 					city.makeSound(x/16, y/16, Sound.MONSTER);
+					
 					soundCount = 50 + city.PRNG.nextInt(101);
 				}
 			}
@@ -162,11 +166,22 @@ public class MonsterSprite extends Sprite
 		}
 
 		int c = getChar(x, y);
-		if (c == -1 ||
-			(c == POLICESTATION )
-			) {
-			this.frame = 0; //kill zilla
+		int v = getMBUValue(x,y);
+		
+		if (c==-1) {
+			this.frame= 0;
 		}
+		if ((v != 0)) {
+			this.health -= 40; //kill zilla
+			city.makeSound(x/16, y/16, Sound.MONSTER);
+			System.out.println(this.health);
+			city.makeSound(x/16, y/16, Sound.GUNFIGHT);
+		}
+			if (this.health <= 0){
+				this.frame = 0;
+			
+		}
+		
 		
 
 		for (Sprite s : city.allSprites())
@@ -181,6 +196,7 @@ public class MonsterSprite extends Sprite
 			}
 		}
 
-		destroyTile(x / 16, y / 16);
+			destroyTile(x / 16, y / 16);
+		
 	}
 }

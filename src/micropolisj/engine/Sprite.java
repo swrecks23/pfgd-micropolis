@@ -56,7 +56,18 @@ public abstract class Sprite
 			return -1;
 		}
 	}
+	protected final int getMBUValue(int x, int y)
+	{
+		int xpos = x / 16;
+		int ypos = y / 16;
+		if (city.testBounds(xpos, ypos)) {
+			return city.getMBUTile(xpos, ypos);
+		} else {
+			return -1;
+		}
+	}
 
+	
 	/**
 	 * For subclasses to override. Actually does the movement and animation
 	 * of this particular sprite. Setting this.frame to zero will cause the
