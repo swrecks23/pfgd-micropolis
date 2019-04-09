@@ -171,7 +171,7 @@ public class MonsterSprite extends Sprite
 		if (c==-1) {
 			this.frame= 0;
 		}
-		if ((v != 0)) {
+		if ((c==v)) {
 			this.health -= 40; //kill zilla
 			city.makeSound(x/16, y/16, Sound.MONSTER);
 			System.out.println(this.health);
