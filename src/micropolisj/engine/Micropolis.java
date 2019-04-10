@@ -435,7 +435,8 @@ public class Micropolis
 	}
 	public char getMBUTile(int xpos, int ypos)
 	{
-		return (char) (mbuMap[ypos][xpos] & LOMASK);
+		return (char) (mbuMap[ypos/10][xpos/10] & LOMASK);
+		
 	}
 	public char getTileRaw(int xpos, int ypos)
 	{

@@ -1014,7 +1014,7 @@
 961   new_building@16,0           (conducts)(behavior=NEW_BUILDING)
 962   new_building@32,0           (conducts)(behavior=NEW_BUILDING)
 963   new_building@0,16           (conducts)(behavior=NEW_BUILDING)
-964   new_building@16,16    (zone)(conducts)(building=3x3)(behavior=NEW_BUILDING)(description=#28)(pollution=850)
+964   new_building@16,16    (zone)(conducts)(building=3x3)(behavior=NEW_BUILDING)(description=#28)(pollution=300)
 965   new_building@32,16          (conducts)(behavior=NEW_BUILDING)
 966   new_building@0,32           (conducts)(behavior=NEW_BUILDING)
 967   new_building@16,32          (conducts)(behavior=NEW_BUILDING)

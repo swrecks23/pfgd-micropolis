@@ -31,7 +31,7 @@ public enum Sound
 	SIREN         ("siren"),
 	HEAVYTRAFFIC  ("heavytraffic"),
 	MONSTER       ("zombie-roar-5"),
-	GUNFIGHT		("gunfight");
+	GUNFIGHT		("AK");
 
 	String wavName;
 	private Sound(String wavName)

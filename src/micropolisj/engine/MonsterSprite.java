@@ -68,7 +68,7 @@ public class MonsterSprite extends Sprite
 		this.destY = p.y * 16 + 8;
 		this.flag = false;
 		this.step = 1;
-		this.health = 100;
+		this.health = 200;
 	}
 
 	@Override
@@ -102,6 +102,8 @@ public class MonsterSprite extends Sprite
 					destX = origX;
 					destY = origY;
 				}
+//				if(this.health<200){destX = NEW_BUILDING;
+//				destY=NEW_BUILDING;}
 				else {
 					// destination was origX, origY;
 					// hide the sprite
@@ -171,14 +173,18 @@ public class MonsterSprite extends Sprite
 		if (c==-1) {
 			this.frame= 0;
 		}
-		if ((c==v)) {
-			this.health -= 40; //kill zilla
-			city.makeSound(x/16, y/16, Sound.MONSTER);
+		System.out.println(v);
+		if ((v!=0) ) {
+			this.health -= 20; //kill zilla
+			
 			System.out.println(this.health);
 			city.makeSound(x/16, y/16, Sound.GUNFIGHT);
 		}
 			if (this.health <= 0){
+				
 				this.frame = 0;
+				
+				city.makeSound(x/16, y/16, Sound.MONSTER);
 			
 		}
 		
