@@ -29,7 +29,7 @@ public enum MicropolisTool
 	POWERPLANT(4, 3000),
 	NUCLEAR(4, 5000),
 	AIRPORT(6, 10000),
-	NEW_BUILDING(3, 1500), //Placeholder for a new tool. 
+	NEW_BUILDING(3, 1500), //MBU Building
 	QUERY(1, 0);
 
 	int size;

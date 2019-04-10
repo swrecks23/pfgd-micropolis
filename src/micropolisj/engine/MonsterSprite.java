@@ -68,7 +68,7 @@ public class MonsterSprite extends Sprite
 		this.destY = p.y * 16 + 8;
 		this.flag = false;
 		this.step = 1;
-		this.health = 200;
+		this.health = 400; //monster's health
 	}
 
 	@Override
@@ -171,20 +171,20 @@ public class MonsterSprite extends Sprite
 		int v = getMBUValue(x,y);
 		
 		if (c==-1) {
-			this.frame= 0;
+			this.frame= 0; //off of the screen
 		}
 		System.out.println(v);
-		if ((v!=0) ) {
+		if ((v!=0) ) { //if monster is within radius
 			this.health -= 20; //kill zilla
 			
 			System.out.println(this.health);
-			city.makeSound(x/16, y/16, Sound.GUNFIGHT);
+			city.makeSound(x/16, y/16, Sound.GUNFIGHT); //make gun sound
 		}
 			if (this.health <= 0){
 				
 				this.frame = 0;
 				
-				city.makeSound(x/16, y/16, Sound.MONSTER);
+				city.makeSound(x/16, y/16, Sound.MONSTER); //make monster sound
 			
 		}
 		
@@ -202,7 +202,7 @@ public class MonsterSprite extends Sprite
 			}
 		}
 
-			destroyTile(x / 16, y / 16);
+			destroyTile(x / 16, y / 16); //monster can still destroy tiles
 		
 	}
 }

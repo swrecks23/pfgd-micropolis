@@ -897,7 +897,7 @@ public class Micropolis
 
 		fireMapOverlayDataChanged(MapState.POLICE_OVERLAY);
 	}
-	void monsterScan()
+	void monsterScan() //coverage
 	{
 		mbuMap = smoothFirePoliceMap(mbuMap);
 		mbuMap = smoothFirePoliceMap(mbuMap);
